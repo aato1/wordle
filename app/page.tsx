@@ -1,8 +1,119 @@
-import Image from "next/image";
+// import Image from "next/image";
+
+'use client';
+import { useState } from "react";
 
 export default function Home() {
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+    <div>
+      <Header />
+      <main className = "grid grid-rows-1 justify-center">
+        <Gameboard />
+        <Input />
+      </main>
+    </div>
+  );
+}
+
+function Input() {
+  const [inputValue, setInputValue] = useState("");
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setInputValue(e.target.value);
+    document.getElementById("input-label")!.innerText = "Input: " + e.target.value;
+  }
+
+  return (
+    <div className = "absolute left:-1">
+      <p id = "input-label">Input:</p>
+      <input type="text" className = "border border-black border-solid border-1" autoFocus maxLength ={5} value={inputValue} onChange={handleChange} />
+    </div>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function Header() {
+  return (
+    <header className="flex justify-center p-4">
+        <h1 className="text-center">Wordle</h1>
+    </header>
+  );
+}
+
+function Gameboard() {
+  
+
+  return (
+    
+    <div className = "grid grid-rows-6 gap-1 w-100">
+      <Gamerow />
+      <Gamerow />
+      <Gamerow />
+      <Gamerow />
+      <Gamerow />
+      <Gamerow />
+    </div>
+  );
+}
+
+function Gamerow() {
+  // let letter = "";
+  
+  return (
+    <div className = "grid grid-cols-5 gap-1 justify-center">
+      
+      <Gamesquare /*letter = {letter} onKeyDown={handleKeyDown}*/ />
+      <Gamesquare /*letter = {letter} onKeyDown={handleKeyDown}*/  />
+      <Gamesquare /*letter = {letter} onKeyDown={handleKeyDown}*/  />
+      <Gamesquare /*letter = {letter} onKeyDown={handleKeyDown}*/  />
+      <Gamesquare /*letter = {letter} onKeyDown={handleKeyDown}*/  />
+    </div>
+  );
+}
+
+
+
+
+
+function Gamesquare(/*{letter, onKeyDown}: {letter: string, onKeyDown?: React.KeyboardEventHandler<HTMLParagraphElement>}*/) {
+  let [letter, setLetter] = useState("");
+
+  function handleKeyDown(e: React.KeyboardEvent<HTMLParagraphElement>) {
+    console.log("click!")
+    
+    setLetter(letter = e.key);
+    /*
+    const nextElement = e.currentTarget.nextElementSibling as HTMLElement | null;
+      nextElement?.focus();
+    */
+  }
+
+
+  return (
+    <div className="w-16 h-16 border-solid border-1 border-black grid place-items-center focus:border-blue" tabIndex={0}  onKeyDown={handleKeyDown}>
+      <p className="w-8 text-center">{letter}</p>
+    </div>
+  );
+}
+
+
+/*
+<div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert h-5 w-[100px]"
@@ -65,5 +176,4 @@ export default function Home() {
         </div>
       </main>
     </div>
-  );
-}
+*/
