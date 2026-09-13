@@ -1,10 +1,10 @@
-// import Image from "next/image";
-
 'use client';
 import { useState } from "react";
+// import { useEffect } from "react";
+
+let testword = "react";
 
 export default function Home() {
-
   return (
     <div>
       <Header />
@@ -16,37 +16,6 @@ export default function Home() {
   );
 }
 
-function Input() {
-  const [inputValue, setInputValue] = useState("");
-
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setInputValue(e.target.value);
-    document.getElementById("input-label")!.innerText = "Input: " + e.target.value;
-  }
-
-  return (
-    <div className = "absolute left:-1">
-      <p id = "input-label">Input:</p>
-      <input type="text" className = "border border-black border-solid border-1" autoFocus maxLength ={5} value={inputValue} onChange={handleChange} />
-    </div>
-  )
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function Header() {
   return (
     <header className="flex justify-center p-4">
@@ -56,10 +25,7 @@ function Header() {
 }
 
 function Gameboard() {
-  
-
   return (
-    
     <div className = "grid grid-rows-6 gap-1 w-100">
       <Gamerow />
       <Gamerow />
@@ -72,108 +38,119 @@ function Gameboard() {
 }
 
 function Gamerow() {
-  // let letter = "";
   
   return (
     <div className = "grid grid-cols-5 gap-1 justify-center">
       
-      <Gamesquare /*letter = {letter} onKeyDown={handleKeyDown}*/ />
-      <Gamesquare /*letter = {letter} onKeyDown={handleKeyDown}*/  />
-      <Gamesquare /*letter = {letter} onKeyDown={handleKeyDown}*/  />
-      <Gamesquare /*letter = {letter} onKeyDown={handleKeyDown}*/  />
-      <Gamesquare /*letter = {letter} onKeyDown={handleKeyDown}*/  />
+      <Gamesquare />
+      <Gamesquare />
+      <Gamesquare />
+      <Gamesquare />
+      <Gamesquare />
     </div>
   );
 }
 
-
-
-
-
-function Gamesquare(/*{letter, onKeyDown}: {letter: string, onKeyDown?: React.KeyboardEventHandler<HTMLParagraphElement>}*/) {
+function Gamesquare() {
+  /*
   let [letter, setLetter] = useState("");
-
+  
   function handleKeyDown(e: React.KeyboardEvent<HTMLParagraphElement>) {
     console.log("click!")
-    
     setLetter(letter = e.key);
-    /*
-    const nextElement = e.currentTarget.nextElementSibling as HTMLElement | null;
-      nextElement?.focus();
-    */
   }
-
+  */
 
   return (
-    <div className="w-16 h-16 border-solid border-1 border-black grid place-items-center focus:border-blue" tabIndex={0}  onKeyDown={handleKeyDown}>
-      <p className="w-8 text-center">{letter}</p>
+    <div className="w-16 h-16 border-solid border-1 border-black grid place-items-center focus:border-blue gameSquare" /*tabIndex={0}  onKeyDown={handleKeyDown}*/>
+      <p className="w-8 text-center">{/*letter*/}</p>
     </div>
   );
 }
 
+function Input() {
+  const [inputValue, setInputValue] = useState("");
 
-/*
-<div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-*/
+  // useEffect(() => {
+  //       console.log("Input value: " + inputValue);
+  //     }, [inputValue]);
+
+
+
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+
+    let newValue = e.target.value;
+
+    for (let i = 0; i < newValue.length; i++) {
+      if (!/^[a-zA-Z]$/.test(newValue.charAt(i))) {
+        console.log("Invalid input: " + newValue.charAt(i));
+        newValue = newValue.slice(0, i) + newValue.slice(i + 1);
+      }
+    }
+
+
+    setInputValue(newValue);
+    console.log("Input value: " + newValue);
+    document.getElementById("input-label")!.innerText = "Input: " + newValue;
+    /*if(inputValue.length == 0) {
+      console.log("Input is empty");
+    }*/
+    /*
+    for (let i = 0; i < newValue.length; i++) {
+      (document.querySelector(".gameSquare p:nth-of-type(" + (i + 1) + ")") as HTMLParagraphElement).innerText = newValue.charAt(i);
+    }*/
+    document.querySelectorAll(".gameSquare p").forEach((p, index) => {
+      p.textContent = newValue.charAt(index) || "";
+    });
+  };
+
+
+
+  
+    function handleSubmit(e : React.FormEvent<HTMLFormElement>) {
+      e.preventDefault();
+      console.log("Submitted: " + inputValue);
+      // document.getElementById("input-label")!.innerText = "Input: ";
+      // setInputValue("");
+      // document.querySelectorAll(".gameSquare p").forEach((p) => {
+      //   p.textContent = "";
+      // });
+
+      document.querySelectorAll(".gameSquare").forEach((div, index) => {
+        if ((div.querySelector("p") as HTMLParagraphElement).textContent === testword.charAt(index)) {
+          div.classList.remove("bg-yellow-400");
+          div.classList.remove("absent");
+          div.classList.add("bg-green-400");
+        }
+        else if (testword.includes((div.querySelector("p") as HTMLParagraphElement).textContent) && (div.querySelector("p") as HTMLParagraphElement).textContent !== "") {
+          
+          div.classList.remove("bg-green-400");
+          div.classList.remove("absent");
+          div.classList.add("bg-yellow-400");
+        }
+        else {
+          div.classList.remove("bg-yellow-400");
+          div.classList.remove("bg-green-400");
+          div.classList.add("absent");
+        }
+      });
+
+
+    
+  /*
+  function checkLetter(e: React.KeyboardEvent<HTMLInputElement>) {
+      if (!/^[a-zA-Z]$/.test(e.key)) {
+      console.log("Invalid input: " + e.key);
+      handleChange({ target: { value: inputValue } } as React.ChangeEvent<HTMLInputElement>);
+    }
+  */
+
+  }
+  return (
+    <form className = "absolute top:-10000 left:-10000"  onSubmit={handleSubmit}>
+      <p id = "input-label">Input:</p>
+      <input type="text" className = "border border-black border-solid border-1" autoFocus maxLength ={5} onChange={handleChange} id = "userGuess" value={inputValue} />
+      <input type="submit" className = "border border-black border-solid border-1" value = "Submit" />
+    </form>
+  )
+}
